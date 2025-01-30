@@ -1,6 +1,7 @@
 package com.openclassrooms.ycyw.services;
 
 import com.openclassrooms.ycyw.dto.LoginDTO;
+import com.openclassrooms.ycyw.dto.MessageDTO;
 import com.openclassrooms.ycyw.dto.RegisterDTO;
 import com.openclassrooms.ycyw.services.interfaces.ValidationService;
 
@@ -38,6 +39,19 @@ public class ValidationServiceImpl implements ValidationService {
     public void validateLogin(LoginDTO loginDTO) {
         BindingResult bindingResult = new BeanPropertyBindingResult(loginDTO, "loginDTO");
         validator.validate(loginDTO, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            String errors = bindingResult.getFieldErrors().stream()
+                    .map(error -> error.getField() + ": " + error.getDefaultMessage())
+                    .collect(Collectors.joining(", "));
+            throw new ValidationException(errors);
+        }
+    }
+
+    @Override
+    public void validateMessage(MessageDTO messageDTO, BindingResult bindingResult) {
+        BindingResult result = new BeanPropertyBindingResult(messageDTO, "messageDTO");
+        validator.validate(messageDTO, result);
 
         if (bindingResult.hasErrors()) {
             String errors = bindingResult.getFieldErrors().stream()
