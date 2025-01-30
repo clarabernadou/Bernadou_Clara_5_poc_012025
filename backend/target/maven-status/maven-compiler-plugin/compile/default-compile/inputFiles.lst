@@ -1,1 +1,13 @@
+/Users/clarabernadou/Documents/GitHub/Bernadou_Clara_5_poc_012025/backend/src/main/java/com/openclassrooms/ycyw/models/TokenResponse.java
+/Users/clarabernadou/Documents/GitHub/Bernadou_Clara_5_poc_012025/backend/src/main/java/com/openclassrooms/ycyw/controllers/AuthenticationController.java
+/Users/clarabernadou/Documents/GitHub/Bernadou_Clara_5_poc_012025/backend/src/main/java/com/openclassrooms/ycyw/dto/LoginDTO.java
+/Users/clarabernadou/Documents/GitHub/Bernadou_Clara_5_poc_012025/backend/src/main/java/com/openclassrooms/ycyw/dto/RegisterDTO.java
+/Users/clarabernadou/Documents/GitHub/Bernadou_Clara_5_poc_012025/backend/src/main/java/com/openclassrooms/ycyw/configuration/SpringSecurityConfig.java
+/Users/clarabernadou/Documents/GitHub/Bernadou_Clara_5_poc_012025/backend/src/main/java/com/openclassrooms/ycyw/repositories/AuthenticationRepository.java
+/Users/clarabernadou/Documents/GitHub/Bernadou_Clara_5_poc_012025/backend/src/main/java/com/openclassrooms/ycyw/services/AuthenticationServiceImpl.java
 /Users/clarabernadou/Documents/GitHub/Bernadou_Clara_5_poc_012025/backend/src/main/java/com/openclassrooms/ycyw/Application.java
+/Users/clarabernadou/Documents/GitHub/Bernadou_Clara_5_poc_012025/backend/src/main/java/com/openclassrooms/ycyw/entities/Auth.java
+/Users/clarabernadou/Documents/GitHub/Bernadou_Clara_5_poc_012025/backend/src/main/java/com/openclassrooms/ycyw/services/ValidationServiceImpl.java
+/Users/clarabernadou/Documents/GitHub/Bernadou_Clara_5_poc_012025/backend/src/main/java/com/openclassrooms/ycyw/services/JWTService.java
+/Users/clarabernadou/Documents/GitHub/Bernadou_Clara_5_poc_012025/backend/src/main/java/com/openclassrooms/ycyw/services/interfaces/ValidationService.java
+/Users/clarabernadou/Documents/GitHub/Bernadou_Clara_5_poc_012025/backend/src/main/java/com/openclassrooms/ycyw/services/interfaces/AuthenticationService.java
