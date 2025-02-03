@@ -1,16 +1,19 @@
 package com.openclassrooms.ycyw.controllers;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.ycyw.dto.ConversationDTO;
+import com.openclassrooms.ycyw.entities.Conversation;
 import com.openclassrooms.ycyw.services.interfaces.ConversationService;
 
 @RestController
@@ -26,5 +29,10 @@ public class ConversationController {
     @PostMapping("/{receiverId}/conversation")
     public ResponseEntity<String> createConversationWithUser(ConversationDTO conversationDTO, @PathVariable Long receiverId, Principal principalUser) {
         return ResponseEntity.status(HttpStatus.CREATED).body(conversationService.createConversationBetweenUsers(conversationDTO, principalUser, receiverId).orElseThrow(() -> new RuntimeException("Conversation failed")));
+    }
+
+    @GetMapping("/conversations")
+    public ResponseEntity<List<Conversation>> getAllUserConversations(Principal principal) {
+        return ResponseEntity.status(HttpStatus.OK).body(conversationService.getAllUserConversations(principal));
     }
 }
