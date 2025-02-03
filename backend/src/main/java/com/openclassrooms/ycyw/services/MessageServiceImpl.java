@@ -1,13 +1,12 @@
 package com.openclassrooms.ycyw.services;
 
 import java.security.Principal;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.Comparator;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.ycyw.dto.MessageDTO;
@@ -30,15 +29,6 @@ public class MessageServiceImpl implements MessageService {
         this.authenticationRepository = authenticationRepository;
         this.conversationRepository = conversationRepository;
         this.modelMapper = modelMapper;
-
-        PropertyMap<MessageDTO, Message> commentMap = new PropertyMap<MessageDTO, Message>() {
-            @Override
-            protected void configure() {
-                map().setContent(source.getContent());
-            }
-        };
-
-        this.modelMapper.addMappings(commentMap);
     }
 
     @Override
