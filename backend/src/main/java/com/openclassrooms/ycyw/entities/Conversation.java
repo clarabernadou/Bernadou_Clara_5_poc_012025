@@ -1,6 +1,6 @@
 package com.openclassrooms.ycyw.entities;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,20 +32,20 @@ public class Conversation {
     private Auth user2Id;
 
     @Column(updatable = false, name = "created_at")
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @Column(updatable = true, name = "updated_at")
-    private LocalDate updatedAt;
+    private LocalDateTime updatedAt;
 
     @PrePersist
     protected void onCreate() {
-        createdAt = LocalDate.now();
-        updatedAt = LocalDate.now();
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
     }
 
     @PreUpdate
     protected void onUpdate() {
-        updatedAt = LocalDate.now();
+        updatedAt = LocalDateTime.now();
     }
 
     public Conversation() {}
