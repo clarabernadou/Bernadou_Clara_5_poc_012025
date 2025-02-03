@@ -1,1 +1,13 @@
+com/openclassrooms/ycyw/entities/Auth.class
+com/openclassrooms/ycyw/dto/RegisterDTO.class
+com/openclassrooms/ycyw/services/AuthenticationServiceImpl.class
+com/openclassrooms/ycyw/repositories/AuthenticationRepository.class
+com/openclassrooms/ycyw/configuration/SpringSecurityConfig.class
+com/openclassrooms/ycyw/services/interfaces/AuthenticationService.class
+com/openclassrooms/ycyw/controllers/AuthenticationController.class
+com/openclassrooms/ycyw/services/interfaces/ValidationService.class
+com/openclassrooms/ycyw/models/TokenResponse.class
+com/openclassrooms/ycyw/services/JWTService.class
 com/openclassrooms/ycyw/Application.class
+com/openclassrooms/ycyw/services/ValidationServiceImpl.class
+com/openclassrooms/ycyw/dto/LoginDTO.class
