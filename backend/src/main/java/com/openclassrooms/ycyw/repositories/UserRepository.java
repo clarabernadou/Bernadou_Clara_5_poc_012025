@@ -5,10 +5,9 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.openclassrooms.ycyw.entities.Message;
+import com.openclassrooms.ycyw.entities.Auth;
 
 @Repository
-public interface MessageRepository extends CrudRepository<Message, Long> {
-    List<Message> findAllById(Long id);
-    List<Message> findAll();
+public interface UserRepository extends CrudRepository<Auth, Long> {
+    List<Auth> findAll();
 }

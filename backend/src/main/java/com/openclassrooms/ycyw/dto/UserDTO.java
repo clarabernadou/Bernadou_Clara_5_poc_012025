@@ -1,0 +1,9 @@
+package com.openclassrooms.ycyw.dto;
+
+import lombok.Data;
+
+@Data
+public class UserDTO {
+    private String firstName;
+    private String lastName;
+}
