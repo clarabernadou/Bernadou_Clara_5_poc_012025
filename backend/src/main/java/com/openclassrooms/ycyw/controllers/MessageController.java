@@ -30,8 +30,8 @@ public class MessageController {
     }
 
     @PostMapping("/{conversationId}/message")
-    public ResponseEntity<String> sendMessage(@Valid @RequestBody MessageDTO messageDTO, @PathVariable Long conversationId, Principal principalUser) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(messageService.sendMessage(messageDTO, conversationId, principalUser).orElseThrow(() -> new RuntimeException("Message failed")));
+    public ResponseEntity<?> sendMessage(@Valid @RequestBody MessageDTO messageDTO, @PathVariable Long conversationId, Principal principalUser) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(messageService.sendMessage(messageDTO, conversationId, principalUser));
     }
 
     @GetMapping("/{conversationId}/messages")
