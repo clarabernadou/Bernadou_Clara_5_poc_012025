@@ -38,6 +38,7 @@ export class RegisterComponent implements OnDestroy {
     const registerRequest: Register = this.form.value as Register;
     this.authService.register(registerRequest).pipe(
       tap((response: AuthToken) => {
+        localStorage.setItem('email', registerRequest.email);
         localStorage.setItem('token', response.token);
         this.router.navigate(['/conversations']);
       }),

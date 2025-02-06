@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="aa2e3d21-7fd3-4efb-9ec0-94b421dd509c" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/openclassrooms/ycyw/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +52,7 @@
     "JUnit.YourCarYourWayApplicationTests.executor": "Run",
     "Maven.your-car-your-way [spring-boot:run].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feature/CA-06-create-user",
+    "git-widget-placeholder": "feature/CA-04-create-frontend-with-angular",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/clarabernadou/Documents/GitHub/Bernadou_Clara_5_poc_012025",
     "project.structure.last.edited": "Project",
