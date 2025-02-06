@@ -1,0 +1,23 @@
+<div>
+    <h1>Sign up</h1>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="firstname">First name</label>
+            <input formControlName="firstName" ngModel required />
+        </div>
+        <div>
+            <label for="lastname">Last name</label>
+            <input formControlName="lastName" ngModel required />
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" formControlName="email" ngModel required />
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" formControlName="password" ngModel required />
+        </div>
+        <a routerLink="/login" routerLinkActive="active">Already have an account?</a>
+        <button type="submit" [disabled]="!form.valid" class="primary-btn">Sign up</button>
+    </form>
+</div>
