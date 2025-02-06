@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { BehaviorSubject, catchError, mergeMap, Subject, takeUntil, tap } from 'rxjs';
 import { Conversation } from '../interfaces/conversation.interface';
 import { ConversationsService } from '../conversations.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-conversations',
@@ -16,6 +17,7 @@ export class ConversationsComponent implements OnDestroy {
 
   constructor(
     private conversationService: ConversationsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -45,10 +47,17 @@ export class ConversationsComponent implements OnDestroy {
     return user1 || user2;
   }
 
+  goToMessages(conversationId: number): void {
+    this.router.navigate([`/conversation`, conversationId, 'messages']);
+  }
+
   logout() {
     localStorage.removeItem('token');
     window.location.href = '/login';
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

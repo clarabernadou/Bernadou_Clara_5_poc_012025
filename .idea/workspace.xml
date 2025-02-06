@@ -7,6 +7,7 @@
     <list default="true" id="aa2e3d21-7fd3-4efb-9ec0-94b421dd509c" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/openclassrooms/ycyw/controllers/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

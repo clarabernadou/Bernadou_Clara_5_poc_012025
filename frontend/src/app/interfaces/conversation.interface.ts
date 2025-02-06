@@ -1,12 +1,12 @@
 import { User } from "./user.interface";
 
 export interface Message {
-    id: number;
-    userId: number;
-    conversationId: number;
+    id?: number;
+    userId?: User;
+    conversationId?: number;
     content: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
 
 export interface Conversation {

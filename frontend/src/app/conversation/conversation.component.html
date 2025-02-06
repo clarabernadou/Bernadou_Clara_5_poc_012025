@@ -1,0 +1,21 @@
+<div>
+    <button (click)="goToConversations()" class="back-btn">Back</button>
+    <div class="conversation-container">
+        <h1>Conversation avec {{ userName }}</h1>
+        <div class="conversation-content">
+            <div *ngFor="let message of messages" class="message-container">
+                <p class="username" [ngClass]="{ 'sent': itsMyMessage(message), 'received': !itsMyMessage(message) }">
+                    {{ message.userId?.firstName }} {{ message.userId?.lastName }}
+                </p>
+                <div class="message" [ngClass]="{ 'sent': itsMyMessage(message), 'received': !itsMyMessage(message) }">
+                    <p>{{ message.content }}</p>
+                    <p class="send-to">{{ message.createdAt }}</p>
+                </div>
+            </div>
+        </div>
+        <form [formGroup]="newMessage" (ngSubmit)="sendMessage()">
+            <input type="text" formControlName="content" placeholder="Type a message..." />
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+</div>

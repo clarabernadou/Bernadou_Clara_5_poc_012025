@@ -7,13 +7,15 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ConversationsComponent } from './conversations/conversations.component';
+import { ConversationComponent } from './conversation/conversation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    ConversationsComponent
+    ConversationsComponent,
+    ConversationComponent
   ],
   imports: [
     BrowserModule,

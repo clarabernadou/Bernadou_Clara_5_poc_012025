@@ -7,7 +7,7 @@
         <p>No conversations yet</p>
     </div>
     <div *ngFor="let conversation of conversations">
-        <a [routerLink]="['/conversation', conversation.id, '/messages']" routerLinkActive="active" class="conversation-card">
+        <a (click)="goToMessages(conversation.id)" class="conversation-card">
             <p>{{ getConversationName(conversation) }}</p>
             <p class="last-message">{{ conversation.updatedAt}}</p>
         </a>
