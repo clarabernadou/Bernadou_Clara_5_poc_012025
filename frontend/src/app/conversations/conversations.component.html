@@ -2,14 +2,29 @@
     <nav>
         <button (click)="logout()" class="primary-btn">Log out</button>
     </nav>
-    <h1>Conversations</h1>
-    <div *ngIf="conversations.length === 0">
-        <p>No conversations yet</p>
-    </div>
-    <div *ngFor="let conversation of conversations">
-        <a (click)="goToMessages(conversation.id)" class="conversation-card">
-            <p>{{ getConversationName(conversation) }}</p>
-            <p class="last-message">{{ conversation.updatedAt}}</p>
-        </a>
+    <div class="container">
+        <div class="conversations-list">
+            <h1>Conversations</h1>
+            <div *ngIf="conversations.length === 0">
+                <p>No conversations yet</p>
+            </div>
+            <div *ngFor="let conversation of conversations">
+                <a (click)="goToMessages(conversation.id)" class="conversation-card">
+                    <p>{{ getConversationName(conversation) }}</p>
+                    <p class="last-message">{{ conversation.updatedAt}}</p>
+                </a>
+            </div>
+        </div>
+        <div class="users-list">
+            <h1>Users list</h1>
+            <div *ngIf="users.length === 0">
+                <p>No users yet</p>
+            </div>
+            <div *ngFor="let user of users">
+                    <a (click)="startConversation(user.id)" class="user-card">
+                        <p>{{ user.firstName }} {{ user.lastName }}</p>
+                    </a>
+            </div>
+        </div>        
     </div>
 </div>

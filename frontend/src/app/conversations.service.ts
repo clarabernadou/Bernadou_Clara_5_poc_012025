@@ -19,4 +19,15 @@ export class ConversationsService {
 
     return this.http.get<Conversation[]>('http://localhost:8080/api/auth/user/conversations', { headers });
   }
+
+  startConversation(userId: number): Observable<void> {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.post<void>(`http://localhost:8080/api/auth/user/${userId}/conversation`, null, { headers });
+  }
 }
