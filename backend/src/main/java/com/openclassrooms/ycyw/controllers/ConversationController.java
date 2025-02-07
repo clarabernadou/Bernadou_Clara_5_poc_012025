@@ -27,8 +27,8 @@ public class ConversationController {
     }
 
     @PostMapping("/{receiverId}/conversation")
-    public ResponseEntity<String> createConversationWithUser(ConversationDTO conversationDTO, @PathVariable Long receiverId, Principal principalUser) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(conversationService.createConversationBetweenUsers(conversationDTO, principalUser, receiverId).orElseThrow(() -> new RuntimeException("Conversation failed")));
+    public ResponseEntity<?> createConversationWithUser(ConversationDTO conversationDTO, @PathVariable Long receiverId, Principal principalUser) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(conversationService.createConversationBetweenUsers(conversationDTO, principalUser, receiverId));
     }
 
     @GetMapping("/conversations")
