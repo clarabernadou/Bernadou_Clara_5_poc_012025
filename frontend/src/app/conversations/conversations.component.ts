@@ -87,8 +87,9 @@ export class ConversationsComponent implements OnDestroy {
   startConversation(userId: number): void {
     this.conversationService.startConversation(userId).pipe(
       tap(() => {
-        switchMap(() => this.getConversations()),
-        switchMap(() => this.getUsers())
+        this.getConversations().pipe(
+          mergeMap(() => this.getUsers())
+        ).subscribe();
       }),
       catchError((error) => {
         console.error(error);
