@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { BehaviorSubject, catchError, mergeMap, Observable, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, catchError, interval, mergeMap, Observable, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { Conversation } from '../interfaces/conversation.interface';
 import { ConversationsService } from '../conversations.service';
 import { Router } from '@angular/router';
@@ -35,6 +35,16 @@ export class ConversationsComponent implements OnDestroy {
     this.getConversations().pipe(
       mergeMap(() => this.getUsers())
     ).subscribe();
+
+    interval(500)
+    .pipe(
+      switchMap(() => this.conversationService.getConversations()),
+      takeUntil(this.destroy$)
+    )
+    .subscribe((response: Conversation[]) => {
+      this.conversationsSubject.next(response);
+      this.conversations = response;
+    });
   }
 
   getConversations(): Observable<Conversation[]> {
