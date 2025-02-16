@@ -1,5 +1,5 @@
-import { Component, OnDestroy } from '@angular/core';
-import { BehaviorSubject, catchError, mergeMap, Observable, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BehaviorSubject, catchError, forkJoin, interval, Observable, of, Subject, takeUntil, tap } from 'rxjs';
 import { Conversation } from '../interfaces/conversation.interface';
 import { ConversationsService } from '../conversations.service';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { UsersService } from '../users.service';
   templateUrl: './conversations.component.html',
   styleUrls: ['../app.component.scss']
 })
-export class ConversationsComponent implements OnDestroy {
+export class ConversationsComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   private conversationsSubject = new BehaviorSubject<Conversation[]>([]);
@@ -20,6 +20,7 @@ export class ConversationsComponent implements OnDestroy {
   private usersSubject = new BehaviorSubject<any[]>([]);
   public users$ = this.usersSubject.asObservable();
   public users: any[] = [];
+  private currentUserEmail: string = '';
 
   constructor(
     private conversationService: ConversationsService,
@@ -31,30 +32,46 @@ export class ConversationsComponent implements OnDestroy {
     if (!localStorage.getItem('token')) {
       window.location.href = '/login';
     }
+    this.currentUserEmail = localStorage.getItem('email') || '';
+    this.refreshData();
 
-    this.getConversations().pipe(
-      mergeMap(() => this.getUsers())
-    ).subscribe();
+    interval(500)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(() => this.refreshData());
   }
 
-  getConversations(): Observable<Conversation[]> {
-    return this.conversationService.getConversations().pipe(
-      tap((response: Conversation[]) => {
-        this.conversationsSubject.next(response);
-        this.conversations = response;
-      }),
-      catchError((error) => {
-        console.error(error);
-        return of([]);
-      }),
-      takeUntil(this.destroy$)
-    );
+  private refreshData(): void {
+    forkJoin({
+      conversations: this.conversationService.getConversations().pipe(
+        catchError((error) => {
+          console.error(error);
+          return of([]);
+        })
+      ),
+      users: this.usersService.getUsers().pipe(
+        catchError((error) => {
+          console.error(error);
+          return of([]);
+        })
+      )
+    }).subscribe(({ conversations, users }) => {
+      this.conversations = conversations;
+      this.conversationsSubject.next(conversations);
+
+      const filteredUsers = users.filter(user => {
+        const isUserInConversation = conversations.some(conv =>
+          conv.user1Id.email === user.email || conv.user2Id.email === user.email
+        );
+        return user.email !== this.currentUserEmail && !isUserInConversation;
+      });
+      this.users = filteredUsers;
+      this.usersSubject.next(filteredUsers);
+    });
   }
 
   getConversationName(conversation: Conversation): string {
-    const currentUserEmail = localStorage.getItem('email');
-    const user1 = conversation.user1Id.email !== currentUserEmail ? `${conversation.user1Id.firstName} ${conversation.user1Id.lastName}` : '';
-    const user2 = conversation.user2Id.email !== currentUserEmail ? `${conversation.user2Id.firstName} ${conversation.user2Id.lastName}` : '';
+    const user1 = conversation.user1Id.email !== this.currentUserEmail ? `${conversation.user1Id.firstName} ${conversation.user1Id.lastName}` : '';
+    const user2 = conversation.user2Id.email !== this.currentUserEmail ? `${conversation.user2Id.firstName} ${conversation.user2Id.lastName}` : '';
     return user1 || user2;
   }
 
@@ -62,35 +79,9 @@ export class ConversationsComponent implements OnDestroy {
     this.router.navigate([`/conversation`, conversationId, 'messages']);
   }
 
-  getUsers(): Observable<any[]> {
-    return this.usersService.getUsers().pipe(
-      tap((response: any[]) => {
-        const currentUserEmail = localStorage.getItem('email');
-        const conversations = this.conversations;
-        response = response.filter((user) => {
-          const isUserInConversation = conversations.some((conversation) => {
-            return conversation.user1Id.email === user.email || conversation.user2Id.email === user.email;
-          });
-          return user.email !== currentUserEmail && !isUserInConversation;
-        });
-        this.usersSubject.next(response);
-        this.users = response;
-      }),
-      catchError((error) => {
-        console.error(error);
-        return of([]);
-      }),
-      takeUntil(this.destroy$)
-    );
-  }
-
   startConversation(userId: number): void {
     this.conversationService.startConversation(userId).pipe(
-      tap(() => {
-        this.getConversations().pipe(
-          mergeMap(() => this.getUsers())
-        ).subscribe();
-      }),
+      tap(() => this.refreshData()),
       catchError((error) => {
         console.error(error);
         return of([]);
@@ -99,7 +90,7 @@ export class ConversationsComponent implements OnDestroy {
     ).subscribe();
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('token');
     window.location.href = '/login';
   }

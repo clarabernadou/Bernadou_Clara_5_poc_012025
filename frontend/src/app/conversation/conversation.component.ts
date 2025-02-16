@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ConversationsService } from '../conversations.service';
 import { Conversation, Message } from '../interfaces/conversation.interface';
-import { BehaviorSubject, catchError, map, Observable, Subject, takeUntil, tap, of } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, Subject, takeUntil, tap, of, interval, switchMap } from 'rxjs';
 import { MessagesService } from '../messages.service';
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -37,6 +37,16 @@ export class ConversationComponent implements OnInit, OnDestroy {
     });
 
     this.getMessages();
+
+    interval(500)
+    .pipe(
+      switchMap(() => this.messagesService.getMessages()),
+      takeUntil(this.destroy$)
+    )
+    .subscribe((response: Message[]) => {
+      this.messagesSubject.next(response);
+      this.messages = response;
+    });
   }
 
   goToConversations(): void {
