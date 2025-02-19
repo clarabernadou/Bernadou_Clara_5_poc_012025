@@ -63,7 +63,7 @@ git clone https://github.com/clarabernadou/Bernadou_Clara_5_poc_012025.git
        CONSTRAINT fk_message_conversation FOREIGN KEY (conversation_id) REFERENCES conversations(id) ON DELETE CASCADE
    );
    ```
-
+   
 ---
 
 ## Configuration de la base de données dans l'application
