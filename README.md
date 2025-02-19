@@ -81,9 +81,6 @@ spring.datasource.password=your_password
 
 ---
 
-Cette section permettra à toute personne de configurer correctement la base de données pour votre projet. Assurez-vous que le serveur MySQL est démarré avant de lancer l'application backend.
----
-
 ## Frontend
 
 ### Étapes pour démarrer le frontend
